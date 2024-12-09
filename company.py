@@ -81,3 +81,4 @@ def dep_employers_names(departement): # 3. Вывести имена всех с
 all_dep_emp_names = dep_employers_names(departments)
 
 
+#def salary_output(department):
