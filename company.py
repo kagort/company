@@ -72,13 +72,59 @@ def employers_names_output (departments): #2. Вывести имена всех
 all_employers_names = employers_names_output(departments)
 print()
 
-def dep_employers_names(departement): # 3. Вывести имена всех сотрудников компании с указанием отдела, в котором они работают.
-    for item in departement:
+def dep_employers_names(departements): # 3. Вывести имена всех сотрудников компании с указанием отдела, в котором они работают.
+    for item in departements:
         print(item["title"])
         for employer in item["employers"]:
             print(f"{employer['first_name']} {employer['last_name']}")
         print()
 all_dep_emp_names = dep_employers_names(departments)
 
+def emp_names_biggest_salary (departments): # 4. Вывести имена всех сотрудников компании, которые получают больше 100к.
+    emp_with_biggest_salary = []
+    for item in departments:
+        for employer in item["employers"]:
+            if employer["salary_rub"]>= 100000:
+                full_name = f"{employer['first_name']} {employer['last_name']}"
+                emp_with_biggest_salary.append(full_name)
+    return emp_with_biggest_salary
+print("Сотрудники с самой высокой зарплатой:")
+result = emp_names_biggest_salary(departments)
+result_str = "\n".join(result)
+print(result_str)
+print()
 
-#def salary_output(department):
+def poor_position (departments): # 5. Вывести позиции, на которых люди получают меньше 80к (можно с повторениями).
+    bad_position = []
+    for item in departments:
+        for employer in item["employers"]:
+            if employer["salary_rub"]<80000:
+                position = f"{employer['position']}"
+                bad_position.append(position)
+    return bad_position
+print("Позиции с самой низкой зарплатой:")
+result = poor_position(departments)
+unique_result = list(set(result))
+result_str = "\n".join(unique_result)
+print(result_str)
+print()
+
+def dep_costs_per_month (departments): # 6. Посчитать, сколько денег в месяц уходит на каждый отдел – и вывести вместе с названием отдела.
+    for item in departments:
+        total_salary = 0
+        for employer in item["employers"]:
+            total_salary += employer["salary_rub"]
+        print(f"В месяц уходит на {item['title']}: {total_salary} рублей")
+
+dep_total_salary = dep_costs_per_month(departments)
+print(dep_total_salary)
+#(Как убрать None в выводе?)
+
+
+
+
+
+
+
+
+
